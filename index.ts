@@ -1,7 +1,9 @@
 import { Application } from "express";
 
 const express = require("express");
+
 const app: Application = express();
+const PORT = 3001;
 
 app.use(express.json());
 
@@ -91,7 +93,6 @@ app.get("/info", (request, response) => {
   );
 });
 
-const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
