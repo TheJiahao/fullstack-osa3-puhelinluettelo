@@ -3,6 +3,8 @@ import { Application } from "express";
 const express = require("express");
 const app: Application = express();
 
+app.use(express.json());
+
 let persons = [
   {
     name: "Arto Hellas",
@@ -53,6 +55,16 @@ app.delete("/api/persons/:id", (request, response) => {
   console.log("Persons", persons);
 
   response.status(204).end();
+});
+
+app.post("/api/persons", (request, response) => {
+  const person = request.body;
+  console.log("Person in request", person);
+
+  person.id = Math.floor(Math.random() * 10000000);
+
+  persons = persons.concat(person);
+  console.log("Added person", person);
 });
 
 app.get("/info", (request, response) => {
