@@ -30,6 +30,21 @@ app.get("/api/persons", (request, response) => {
   response.json(persons);
 });
 
+app.get("/api/persons/:id", (request, response) => {
+  const id = Number(request.params.id);
+  console.log("Requested id", id);
+
+  const person = persons.find((person) => person.id === id);
+  console.log("Requested person", person);
+
+  if (!person) {
+    response.status(404).end();
+    return;
+  }
+
+  response.json(person);
+});
+
 app.get("/info", (request, response) => {
   const currentTime = new Date();
   console.log(currentTime);
