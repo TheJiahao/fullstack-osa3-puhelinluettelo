@@ -95,7 +95,7 @@ app.post("/api/persons", (request, response) => {
   persons = persons.concat(person);
   console.log("Added person", person);
 
-  response.end();
+  response.json(person).end();
 });
 
 app.get("/info", (request, response) => {
