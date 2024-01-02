@@ -75,7 +75,7 @@ app.delete("/api/persons/:id", (request, response) => {
 });
 
 app.post("/api/persons", (request, response) => {
-  const person = request.body;
+  const person = { ...request.body };
   console.log("Person in request", person);
 
   if (!("number" in person && "name" in person)) {
