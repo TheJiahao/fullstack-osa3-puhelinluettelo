@@ -61,6 +61,18 @@ app.post("/api/persons", (request, response) => {
   const person = request.body;
   console.log("Person in request", person);
 
+  if (!("number" in person && "name" in person)) {
+    response.status(400);
+    response.send({ error: "Name or number missing." }).end();
+
+    return;
+  }
+
+  if (persons.map((person) => person.name).includes(person.name)) {
+    response.status(409);
+    response.send({ error: "Name already added." }).end();
+  }
+
   person.id = Math.floor(Math.random() * 10000000);
 
   persons = persons.concat(person);
