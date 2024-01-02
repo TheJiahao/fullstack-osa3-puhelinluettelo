@@ -45,6 +45,16 @@ app.get("/api/persons/:id", (request, response) => {
   response.json(person);
 });
 
+app.delete("/api/persons/:id", (request, response) => {
+  const id = Number(request.params.id);
+  console.log("Deleting id", id);
+
+  persons = persons.filter((person) => person.id !== id);
+  console.log("Persons", persons);
+
+  response.status(204).end();
+});
+
 app.get("/info", (request, response) => {
   const currentTime = new Date();
   console.log(currentTime);
