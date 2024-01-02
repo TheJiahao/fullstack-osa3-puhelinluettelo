@@ -1,6 +1,7 @@
 import { Application } from "express";
 
 const express = require("express");
+const cors = require("cors");
 const morgan = require("morgan");
 
 const app: Application = express();
@@ -18,6 +19,7 @@ app.use(
     ":method :url :status :res[content-length] - :response-time ms :content"
   )
 );
+app.use(cors());
 
 let persons = [
   {
