@@ -6,7 +6,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 
 const app: Application = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 morgan.token("content", (request, respond) => {
   if (request.method === "POST") {
