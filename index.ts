@@ -33,7 +33,7 @@ let persons = [
 ];
 
 app.get("/api/persons", (request, response) => {
-  response.json(persons);
+  response.json(persons).end();
 });
 
 app.get("/api/persons/:id", (request, response) => {
@@ -48,7 +48,7 @@ app.get("/api/persons/:id", (request, response) => {
     return;
   }
 
-  response.json(person);
+  response.json(person).end();
 });
 
 app.delete("/api/persons/:id", (request, response) => {
@@ -81,18 +81,22 @@ app.post("/api/persons", (request, response) => {
 
   persons = persons.concat(person);
   console.log("Added person", person);
+
+  response.end();
 });
 
 app.get("/info", (request, response) => {
   const currentTime = new Date();
   console.log(currentTime);
 
-  response.send(
-    [
-      `<p>Phonebook has info for ${persons.length} people</p>`,
-      `<p>${currentTime.toString()}</p>`,
-    ].join("\n")
-  );
+  response
+    .send(
+      [
+        `<p>Phonebook has info for ${persons.length} people</p>`,
+        `<p>${currentTime.toString()}</p>`,
+      ].join("\n")
+    )
+    .end();
 });
 
 app.listen(PORT, () => {
