@@ -1,4 +1,5 @@
 import { Application } from "express";
+import Person from "./interfaces/Person";
 
 const express = require("express");
 const cors = require("cors");
@@ -21,7 +22,7 @@ app.use(
 );
 app.use(cors());
 
-let persons = [
+let persons: Person[] = [
   {
     name: "Arto Hellas",
     number: "040-123456",
