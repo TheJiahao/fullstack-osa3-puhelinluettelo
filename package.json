@@ -1,0 +1,19 @@
+{
+  "name": "fullstack-osa3-puhelinluettelo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "start": "node index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.ts"
+  },
+  "author": "Jiahao Li",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
