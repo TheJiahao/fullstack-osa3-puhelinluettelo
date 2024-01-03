@@ -9,6 +9,7 @@ const initialize_routes = (app: Application) => {
   initialize_get_all_persons(app);
   initialize_delete_person(app);
   initialize_info_page(app);
+  initialize_get_person_by_id(app);
 };
 
 const initialize_get_all_persons = (app: Application) => {
@@ -63,6 +64,36 @@ const initialize_info_page = (app: Application) => {
         mongoose.connection.close();
       })
       .catch((error) => console.log("Error retrieving persons from DB", error));
+  });
+};
+
+const initialize_get_person_by_id = (app: Application) => {
+  app.get("/api/persons/:id", (request, response) => {
+    let id = request.params.id;
+    console.log("id as string", id);
+
+    try {
+      id = new mongoose.Types.ObjectId(request.params.id);
+
+      person
+        .findById(id)
+        .then((result) => {
+          mongoose.connection.close();
+          console.log("Returned person", result);
+
+          if (!result) {
+            response.status(404).end();
+            return;
+          }
+
+          response.json(result).end();
+        })
+        .catch(() => console.log("Delete failed"));
+    } catch (error) {
+      console.log(`Invalid id ${id}:`, error);
+
+      response.status(404).end();
+    }
   });
 };
 

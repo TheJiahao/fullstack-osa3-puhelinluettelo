@@ -51,21 +51,6 @@ let persons: Person[] = [
 
 initialize_routes(app);
 
-app.get("/api/persons/:id", (request, response) => {
-  const id = Number(request.params.id);
-  console.log("Requested id", id);
-
-  const person = persons.find((person) => person.id === id);
-  console.log("Requested person", person);
-
-  if (!person) {
-    response.status(404).end();
-    return;
-  }
-
-  response.json(person).end();
-});
-
 app.post("/api/persons", (request, response) => {
   const person = { ...request.body };
   console.log("Person in request", person);
