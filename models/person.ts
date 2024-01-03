@@ -1,4 +1,4 @@
-import { Model, Schema, mongo } from "mongoose";
+import { Model, Schema } from "mongoose";
 import Person from "../interfaces/Person";
 
 const mongoose = require("mongoose");
