@@ -34,7 +34,6 @@ const initialize_delete_person = (app: Application) => {
     person
       .deleteOne({ _id: id })
       .then(() => {
-        mongoose.connection.close();
         console.log("Deleted");
       })
       .catch(() => console.log("Delete failed"));
@@ -61,8 +60,6 @@ const initialize_info_page = (app: Application) => {
             ].join("\n")
           )
           .end();
-
-        mongoose.connection.close();
       })
       .catch((error) => console.log("Error retrieving persons from DB", error));
   });
@@ -79,7 +76,6 @@ const initialize_get_person_by_id = (app: Application) => {
       person
         .findById(id)
         .then((result) => {
-          mongoose.connection.close();
           console.log("Returned person", result);
 
           if (!result) {
