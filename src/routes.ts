@@ -15,6 +15,7 @@ const initialize_get_all_persons = (app: Application) => {
   app.get("/api/persons", (request, response) => {
     person.find({}).then((result) => {
       const persons = result;
+      console.log("Persons from DB", persons);
 
       response.json(persons).end();
     });
@@ -61,7 +62,7 @@ const initialize_info_page = (app: Application) => {
 
         mongoose.connection.close();
       })
-      .catch((error) => console.log("Error retrieving persons from DB",error));
+      .catch((error) => console.log("Error retrieving persons from DB", error));
   });
 };
 
