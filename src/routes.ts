@@ -29,7 +29,10 @@ const initialize_delete_person = (app: Application) => {
 
     person
       .deleteOne({ _id: id })
-      .then(() => console.log("Deleted"))
+      .then(() => {
+        mongoose.connection.close();
+        console.log("Deleted");
+      })
       .catch(() => console.log("Delete failed"));
 
     response.status(204).end();
