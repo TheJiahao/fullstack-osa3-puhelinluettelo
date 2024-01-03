@@ -90,20 +90,6 @@ app.post("/api/persons", (request, response) => {
   response.json(person).end();
 });
 
-app.get("/info", (request, response) => {
-  const currentTime = new Date();
-  console.log(currentTime);
-
-  response
-    .send(
-      [
-        `<p>Phonebook has info for ${persons.length} people</p>`,
-        `<p>${currentTime.toString()}</p>`,
-      ].join("\n")
-    )
-    .end();
-});
-
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

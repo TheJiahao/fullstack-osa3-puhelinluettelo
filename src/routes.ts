@@ -8,6 +8,7 @@ const person: Model<Person> = require("./models/person");
 const initialize_routes = (app: Application) => {
   initialize_get_all_persons(app);
   initialize_delete_person(app);
+  initialize_info_page(app);
 };
 
 const initialize_get_all_persons = (app: Application) => {
@@ -36,6 +37,31 @@ const initialize_delete_person = (app: Application) => {
       .catch(() => console.log("Delete failed"));
 
     response.status(204).end();
+  });
+};
+
+const initialize_info_page = (app: Application) => {
+  app.get("/info", (request, response) => {
+    const currentTime = new Date();
+    console.log(currentTime);
+
+    person
+      .find({})
+      .then((result) => {
+        console.log("Persons from database", result);
+
+        response
+          .send(
+            [
+              `<p>Phonebook has info for ${result.length} people</p>`,
+              `<p>${currentTime.toString()}</p>`,
+            ].join("\n")
+          )
+          .end();
+
+        mongoose.connection.close();
+      })
+      .catch((error) => console.log("Error retrieving persons from DB",error));
   });
 };
 
