@@ -1,4 +1,4 @@
-require("dotenv").config()
+require("dotenv").config();
 
 import { Application } from "express";
 import Person from "./interfaces/Person";
@@ -64,16 +64,6 @@ app.get("/api/persons/:id", (request, response) => {
   }
 
   response.json(person).end();
-});
-
-app.delete("/api/persons/:id", (request, response) => {
-  const id = Number(request.params.id);
-  console.log("Deleting id", id);
-
-  persons = persons.filter((person) => person.id !== id);
-  console.log("Persons", persons);
-
-  response.status(204).end();
 });
 
 app.post("/api/persons", (request, response) => {
