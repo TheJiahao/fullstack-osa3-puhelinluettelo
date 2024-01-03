@@ -1,5 +1,8 @@
+require("dotenv").config()
+
 import { Application } from "express";
 import Person from "./interfaces/Person";
+import initialize_routes from "./routes";
 
 const express = require("express");
 const cors = require("cors");
@@ -46,9 +49,7 @@ let persons: Person[] = [
   },
 ];
 
-app.get("/api/persons", (request, response) => {
-  response.json(persons).end();
-});
+initialize_routes(app);
 
 app.get("/api/persons/:id", (request, response) => {
   const id = Number(request.params.id);
