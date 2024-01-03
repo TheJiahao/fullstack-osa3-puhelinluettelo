@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "tsc index.ts && node index.js",
+    "start": "tsc && node ts-build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsc-watch index.ts --onSuccess \"node index.js\""
+    "dev": "tsc-watch index.ts --onSuccess \"node ts-build/index.js\""
   },
   "author": "Jiahao Li",
   "license": "MIT",
