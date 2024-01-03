@@ -6,7 +6,7 @@
   "scripts": {
     "start": "tsc && node ts-build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsc-watch index.ts --onSuccess \"node ts-build/index.js\""
+    "dev": "tsc-watch --onSuccess \"node ts-build/index.js\""
   },
   "author": "Jiahao Li",
   "license": "MIT",
