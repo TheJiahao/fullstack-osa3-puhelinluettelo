@@ -14,13 +14,16 @@ const initialize_routes = (app: Application) => {
 };
 
 const initialize_get_all_persons = (app: Application) => {
-  app.get("/api/persons", (request, response) => {
-    person.find({}).then((result) => {
-      const persons = result;
-      console.log("Persons from DB", persons);
+  app.get("/api/persons", (request, response, next) => {
+    person
+      .find({})
+      .then((result) => {
+        const persons = result;
+        console.log("Persons from DB", persons);
 
-      response.json(persons).end();
-    });
+        response.json(persons).end();
+      })
+      .catch((error) => next(error));
   });
 };
 
