@@ -120,9 +120,9 @@ const initializeUpdatePerson = (app: Application) => {
 
     person
       .findByIdAndUpdate(id, newPerson, { new: true })
-      .then(() => {
-        console.log("Updated", newPerson);
-        response.json(newPerson).end();
+      .then((updatedPerson) => {
+        console.log("Updated", updatedPerson);
+        response.json(updatedPerson).end();
       })
       .catch((error) => next(error));
   });
