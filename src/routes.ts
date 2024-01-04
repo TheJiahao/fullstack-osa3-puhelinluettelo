@@ -11,6 +11,7 @@ const initializeRoutes = (app: Application) => {
   initializeInfoPage(app);
   initializeGetPersonById(app);
   initializeCreatePerson(app);
+  initializeUpdatePerson(app);
 };
 
 const initializeGetAllPersons = (app: Application) => {
@@ -105,6 +106,25 @@ const initializeCreatePerson = (app: Application) => {
         console.log("Add person failed:");
         next(error);
       });
+  });
+};
+
+const initializeUpdatePerson = (app: Application) => {
+  app.put("/api/persons/:id", (request, response, next) => {
+    const body = request.body;
+
+    const newPerson = { name: body.name, number: body.number };
+    console.log("Person in request", body);
+
+    const id = request.params.id;
+
+    person
+      .findByIdAndUpdate(id, newPerson, { new: true })
+      .then(() => {
+        console.log("Updated", newPerson);
+        response.json(newPerson).end();
+      })
+      .catch((error) => next(error));
   });
 };
 
