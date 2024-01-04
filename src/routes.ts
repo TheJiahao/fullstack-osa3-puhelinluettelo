@@ -90,13 +90,6 @@ const initializeCreatePerson = (app: Application) => {
     const body = request.body;
     console.log("Person in request", body);
 
-    if (!body.number || !body.name) {
-      response.status(400);
-      response.send({ error: "Name or number missing." }).end();
-
-      return;
-    }
-
     new person({ name: body.name, number: body.number })
       .save()
       .then((savedPerson) => {

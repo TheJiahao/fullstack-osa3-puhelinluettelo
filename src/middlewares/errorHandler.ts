@@ -6,6 +6,8 @@ const errorHandler: ErrorRequestHandler = (error, request, response, next) => {
   if (error.name === "CastError") {
     response.status(400).send({ error: "Malformatted id" }).end();
     return;
+  } else if (error.name === "ValidationError") {
+    response.status(400).send({ error: error.message });
   } else {
     response.status(500).send({ error: "Unknown error" }).end();
   }
