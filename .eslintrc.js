@@ -5,7 +5,7 @@ module.exports = {
     es2021: true,
     node: true,
   },
-  extends: "standard-with-typescript",
+  extends: ["eslint:recommended"],
   overrides: [
     {
       env: {
@@ -16,9 +16,15 @@ module.exports = {
         sourceType: "script",
       },
     },
+    {
+      files: "**/*.ts",
+      extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+    },
   ],
   parserOptions: {
     ecmaVersion: "latest",
   },
-  rules: {},
+  rules: {
+    "double": 2
+  },
 };
