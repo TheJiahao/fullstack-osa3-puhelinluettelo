@@ -42,7 +42,7 @@ const initialize_delete_person = (app: Application) => {
 };
 
 const initialize_info_page = (app: Application) => {
-  app.get("/info", (request, response) => {
+  app.get("/info", (request, response, next) => {
     const currentTime = new Date();
     console.log(currentTime);
 
@@ -60,7 +60,7 @@ const initialize_info_page = (app: Application) => {
           )
           .end();
       })
-      .catch((error) => console.log("Error retrieving persons from DB", error));
+      .catch((error) => next(error));
   });
 };
 
