@@ -24,7 +24,5 @@ module.exports = {
   parserOptions: {
     ecmaVersion: "latest",
   },
-  rules: {
-    "double": 2
-  },
+  rules: {},
 };
