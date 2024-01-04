@@ -65,31 +65,22 @@ const initialize_info_page = (app: Application) => {
 };
 
 const initialize_get_person_by_id = (app: Application) => {
-  app.get("/api/persons/:id", (request, response) => {
-    let id = request.params.id;
-    console.log("id as string", id);
+  app.get("/api/persons/:id", (request, response, next) => {
+    const id = request.params.id;
 
-    try {
-      id = new mongoose.Types.ObjectId(request.params.id);
+    person
+      .findById(id)
+      .then((result) => {
+        console.log("Returned person", result);
 
-      person
-        .findById(id)
-        .then((result) => {
-          console.log("Returned person", result);
+        if (!result) {
+          response.status(404).end();
+          return;
+        }
 
-          if (!result) {
-            response.status(404).end();
-            return;
-          }
-
-          response.json(result).end();
-        })
-        .catch(() => console.log("Delete failed"));
-    } catch (error) {
-      console.log(`Invalid id ${id}:`, error);
-
-      response.status(404).end();
-    }
+        response.json(result).end();
+      })
+      .catch((error) => next(error));
   });
 };
 
