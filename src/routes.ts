@@ -85,11 +85,11 @@ const initialize_get_person_by_id = (app: Application) => {
 };
 
 const initialize_create_person = (app: Application) => {
-  app.post("/api/persons", (request, response) => {
+  app.post("/api/persons", (request, response, next) => {
     const body = request.body;
     console.log("Person in request", body);
 
-    if (!("number" in body && "name" in body)) {
+    if (!body.number || !body.name) {
       response.status(400);
       response.send({ error: "Name or number missing." }).end();
 
@@ -102,9 +102,8 @@ const initialize_create_person = (app: Application) => {
         response.json(savedPerson).end();
       })
       .catch((error) => {
-        console.log("Add person failed:", error);
-
-        response.status(500).end();
+        console.log("Add person failed:");
+        next(error);
       });
   });
 };
