@@ -25,17 +25,16 @@ const initialize_get_all_persons = (app: Application) => {
 };
 
 const initialize_delete_person = (app: Application) => {
-  app.delete("/api/persons/:id", (request, response) => {
+  app.delete("/api/persons/:id", (request, response, next) => {
     const id = request.params.id;
 
     person
       .findByIdAndDelete(id)
       .then(() => {
         console.log("Deleted", id);
+        response.status(204).end();
       })
-      .catch(() => console.log("Delete failed"));
-
-    response.status(204).end();
+      .catch((error) => next(error));
   });
 };
 
