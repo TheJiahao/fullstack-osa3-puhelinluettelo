@@ -26,15 +26,12 @@ const initialize_get_all_persons = (app: Application) => {
 
 const initialize_delete_person = (app: Application) => {
   app.delete("/api/persons/:id", (request, response) => {
-    console.log("id as string", request.params.id);
-    const id = new mongoose.Types.ObjectId(request.params.id);
-
-    console.log("id as ObjectId", id);
+    const id = request.params.id;
 
     person
-      .deleteOne({ _id: id })
+      .findByIdAndDelete(id)
       .then(() => {
-        console.log("Deleted");
+        console.log("Deleted", id);
       })
       .catch(() => console.log("Delete failed"));
 
