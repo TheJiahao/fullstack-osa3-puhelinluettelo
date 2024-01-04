@@ -1,9 +1,6 @@
 import { Application } from "express";
-import { Model } from "mongoose";
-import Person from "./interfaces/Person";
 
-const mongoose = require("mongoose");
-const person: Model<Person> = require("./models/person");
+import person = require("./models/person");
 
 const initializeRoutes = (app: Application) => {
   initializeGetAllPersons(app);

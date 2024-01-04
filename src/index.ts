@@ -1,17 +1,18 @@
-require("dotenv").config();
+import dotenv = require("dotenv");
+dotenv.config();
 
 import { Application } from "express";
 import initializeRoutes from "./routes";
 import errorHandler from "./middlewares/errorHandler";
 
-const express = require("express");
-const cors = require("cors");
-const morgan = require("morgan");
+import express = require("express");
+import cors = require("cors");
+import morgan = require("morgan");
 
 const app: Application = express();
 const PORT = process.env.PORT;
 
-morgan.token("content", (request, respond) => {
+morgan.token("content", (request) => {
   if (request.method === "POST") {
     return JSON.stringify(request.body);
   }
