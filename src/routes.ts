@@ -112,7 +112,11 @@ const initializeUpdatePerson = (app: Application) => {
     const id = request.params.id;
 
     person
-      .findByIdAndUpdate(id, newPerson, { new: true })
+      .findByIdAndUpdate(id, newPerson, {
+        new: true,
+        runValidators: true,
+        context: "query",
+      })
       .then((updatedPerson) => {
         console.log("Updated", updatedPerson);
         response.json(updatedPerson).end();
