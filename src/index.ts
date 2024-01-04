@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 import { Application } from "express";
-import initialize_routes from "./routes";
+import initializeRoutes from "./routes";
 import errorHandler from "./middlewares/errorHandler";
 
 const express = require("express");
@@ -26,7 +26,7 @@ app.use(
 app.use(cors());
 app.use(express.static("dist"));
 
-initialize_routes(app);
+initializeRoutes(app);
 
 app.use(errorHandler);
 

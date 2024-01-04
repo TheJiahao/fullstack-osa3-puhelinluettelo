@@ -5,15 +5,15 @@ import Person from "./interfaces/Person";
 const mongoose = require("mongoose");
 const person: Model<Person> = require("./models/person");
 
-const initialize_routes = (app: Application) => {
-  initialize_get_all_persons(app);
-  initialize_delete_person(app);
-  initialize_info_page(app);
-  initialize_get_person_by_id(app);
-  initialize_create_person(app);
+const initializeRoutes = (app: Application) => {
+  initializeGetAllPersons(app);
+  initializeDeletePerson(app);
+  initializeInfoPage(app);
+  initializeGetPersonById(app);
+  initializeCreatePerson(app);
 };
 
-const initialize_get_all_persons = (app: Application) => {
+const initializeGetAllPersons = (app: Application) => {
   app.get("/api/persons", (request, response, next) => {
     person
       .find({})
@@ -27,7 +27,7 @@ const initialize_get_all_persons = (app: Application) => {
   });
 };
 
-const initialize_delete_person = (app: Application) => {
+const initializeDeletePerson = (app: Application) => {
   app.delete("/api/persons/:id", (request, response, next) => {
     const id = request.params.id;
 
@@ -41,7 +41,7 @@ const initialize_delete_person = (app: Application) => {
   });
 };
 
-const initialize_info_page = (app: Application) => {
+const initializeInfoPage = (app: Application) => {
   app.get("/info", (request, response, next) => {
     const currentTime = new Date();
     console.log(currentTime);
@@ -64,7 +64,7 @@ const initialize_info_page = (app: Application) => {
   });
 };
 
-const initialize_get_person_by_id = (app: Application) => {
+const initializeGetPersonById = (app: Application) => {
   app.get("/api/persons/:id", (request, response, next) => {
     const id = request.params.id;
 
@@ -84,7 +84,7 @@ const initialize_get_person_by_id = (app: Application) => {
   });
 };
 
-const initialize_create_person = (app: Application) => {
+const initializeCreatePerson = (app: Application) => {
   app.post("/api/persons", (request, response, next) => {
     const body = request.body;
     console.log("Person in request", body);
@@ -102,10 +102,10 @@ const initialize_create_person = (app: Application) => {
         response.json(savedPerson).end();
       })
       .catch((error) => {
-        console.log("Add person failed");
+        console.log("Add person failed:");
         next(error);
       });
   });
 };
 
-export default initialize_routes;
+export default initializeRoutes;
