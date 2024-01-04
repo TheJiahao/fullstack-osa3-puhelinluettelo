@@ -102,7 +102,7 @@ const initialize_create_person = (app: Application) => {
         response.json(savedPerson).end();
       })
       .catch((error) => {
-        console.log("Add person failed:");
+        console.log("Add person failed");
         next(error);
       });
   });
